@@ -34,7 +34,14 @@ class HerramientaController extends Controller
 
     public function store(StoreHerramientumRequest $request)
     {
-        $herramientum = Herramientum::create($request->all());
+
+        $data = $request->all();
+
+        // Valores por defecto si vienen vacíos
+        $data['horas_para_mantenimiento'] = $data['horas_para_mantenimiento'] ?? 0;
+        $data['horas_acumuladas'] = $data['horas_acumuladas'] ?? 0;
+
+        Herramientum::create($data);
 
         return redirect()->route('admin.herramienta.index');
     }
