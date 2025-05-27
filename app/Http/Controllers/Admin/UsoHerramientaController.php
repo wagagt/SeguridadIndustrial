@@ -10,7 +10,7 @@ use App\Models\AgregarEmpleado;
 use App\Models\ContratoLaboral;
 use App\Models\Herramientum;
 use App\Models\UsoHerramientum;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,10 +40,20 @@ class UsoHerramientaController extends Controller
 
     public function store(StoreUsoHerramientumRequest $request)
     {
-        $usoHerramientum = UsoHerramientum::create($request->all());
-
+        // Crear el registro de uso
+        $uso = UsoHerramientum::create($request->all());
+        // Buscar la herramienta por el campo correcto
+        $herramienta = Herramientum::find($request->herramienta_id);
+        // Sumar horas si todo está en orden
+        if ($herramienta && is_numeric($request->duracion_horas)) {
+            $herramienta->horas_acumuladas += $request->duracion_horas;
+            $herramienta->save();
+        }
         return redirect()->route('admin.uso-herramienta.index');
     }
+
+
+
 
     public function edit(UsoHerramientum $usoHerramientum)
     {

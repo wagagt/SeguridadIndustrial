@@ -71,7 +71,7 @@ return [
     ],
     'agregarEmpleado' => [
         'title'          => 'Agregar Empleado',
-        'title_singular' => 'Agregar Empleado',
+        'title_singular' => 'Empleado',
         'fields'         => [
             'id'                             => 'ID',
             'id_helper'                      => ' ',
@@ -447,7 +447,7 @@ return [
     ],
     'agregarCliente' => [
         'title'          => 'Agregar Cliente',
-        'title_singular' => 'Agregar Cliente',
+        'title_singular' => 'Cliente',
         'fields'         => [
             'id'                      => 'ID',
             'id_helper'               => ' ',

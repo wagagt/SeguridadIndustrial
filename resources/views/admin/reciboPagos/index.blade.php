@@ -194,11 +194,12 @@
                             <td>
                                 {{ $reciboPago->numero_contrato_laboral ?? '' }}
                             </td>
-                            <td>
+                             <td>
                                 @foreach($reciboPago->recibo_pago as $key => $media)
                                     <a href="{{ $media->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $media->getUrl('thumb') }}">
+                                         {{ trans('global.view_file') }} {{-- Solo muestra el nombre del archivo como un enlace --}}
                                     </a>
+                                    <br> {{-- Para que cada archivo esté en su propia línea si hay varios --}}
                                 @endforeach
                             </td>
                             <td>

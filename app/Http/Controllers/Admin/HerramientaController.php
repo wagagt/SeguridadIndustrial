@@ -8,7 +8,7 @@ use App\Http\Requests\StoreHerramientumRequest;
 use App\Http\Requests\UpdateHerramientumRequest;
 use App\Models\CategoriaHerramientum;
 use App\Models\Herramientum;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,10 +17,8 @@ class HerramientaController extends Controller
     public function index()
     {
         abort_if(Gate::denies('herramientum_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $herramienta = Herramientum::with(['categoria'])->get();
-
-        return view('admin.herramienta.index', compact('herramienta'));
+        $herramientas = Herramientum::with(['categoria'])->get();
+        return view('admin.herramienta.index', compact('herramientas'));
     }
 
     public function create()
@@ -34,7 +32,14 @@ class HerramientaController extends Controller
 
     public function store(StoreHerramientumRequest $request)
     {
-        $herramientum = Herramientum::create($request->all());
+
+        $data = $request->all();
+
+        // Valores por defecto si vienen vacíos
+        $data['horas_para_mantenimiento'] = $data['horas_para_mantenimiento'] ?? 0;
+        $data['horas_acumuladas'] = $data['horas_acumuladas'] ?? 0;
+
+        Herramientum::create($data);
 
         return redirect()->route('admin.herramienta.index');
     }
@@ -77,9 +82,8 @@ class HerramientaController extends Controller
 
     public function massDestroy(MassDestroyHerramientumRequest $request)
     {
-        $herramienta = Herramientum::find(request('ids'));
-
-        foreach ($herramienta as $herramientum) {
+        $herramientas = Herramientum::whereIn('id', request('ids'))->get();
+        foreach ($herramientas as $herramientum) {
             $herramientum->delete();
         }
 

@@ -72,11 +72,14 @@ class ReciboPago extends Model implements HasMedia
         return $date->format('Y-m-d H:i:s');
     }
 
+    // ***********************************************************************************
+    // ESTA ES LA SECCIÓN CLAVE: COMENTA O ELIMINA LAS CONVERSIONES
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')->fit('crop', 50, 50);
-        $this->addMediaConversion('preview')->fit('crop', 120, 120);
+        // $this->addMediaConversion('thumb')->fit('crop', 50, 50); // Comentar o eliminar
+        // $this->addMediaConversion('preview')->fit('crop', 120, 120); // Comentar o eliminar
     }
+    // ***********************************************************************************
 
     public function empleado()
     {
@@ -106,11 +109,13 @@ class ReciboPago extends Model implements HasMedia
     public function getReciboPagoAttribute()
     {
         $files = $this->getMedia('recibo_pago');
-        $files->each(function ($item) {
-            $item->url       = $item->getUrl();
-            $item->thumbnail = $item->getUrl('thumb');
-            $item->preview   = $item->getUrl('preview');
-        });
+        // Si no vas a tener conversiones, estas líneas pueden causar problemas o ser innecesarias.
+        // Podrías comentarlas si solo quieres el archivo original.
+        // $files->each(function ($item) {
+        //     $item->url       = $item->getUrl();
+        //     $item->thumbnail = $item->getUrl('thumb'); // Esta línea generaría un error si no hay conversión 'thumb'
+        //     $item->preview   = $item->getUrl('preview'); // Esta línea generaría un error si no hay conversión 'preview'
+        // });
 
         return $files;
     }
