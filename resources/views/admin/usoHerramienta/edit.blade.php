@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.usoHerramientum.title_singular') }}
+       Editar uso de herramienta
     </div>
 
     <div class="card-body">

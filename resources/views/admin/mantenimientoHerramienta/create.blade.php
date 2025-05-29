@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.mantenimientoHerramientum.title_singular') }}
+       Agregar mantenimiento de herramienta
     </div>
 
     <div class="card-body">

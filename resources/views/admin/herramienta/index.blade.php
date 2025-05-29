@@ -4,14 +4,14 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.herramienta.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.herramientum.title_singular') }}
+               Agregar herramienta
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.herramientum.title_singular') }} {{ trans('global.list') }}
+     Lista de herramientas
     </div>
 
     <div class="card-body">
